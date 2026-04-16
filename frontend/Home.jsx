@@ -42,11 +42,12 @@ export default function Home() {
     { target: 24, suffix: "/7", label: "Support" },
   ];
 
-  const [statValues, setStatValues] = useState(stats.map(() => 0));
+  const [statValues, setStatValues] = useState(stats.map(() => 1));
 
   useEffect(() => {
     const duration = 1400;
     const startTime = performance.now();
+    let rafId = 0;
 
     const animateStats = (currentTime) => {
       const progress = Math.min((currentTime - startTime) / duration, 1);
@@ -56,11 +57,12 @@ export default function Home() {
       );
 
       if (progress < 1) {
-        requestAnimationFrame(animateStats);
+        rafId = requestAnimationFrame(animateStats);
       }
     };
 
-    requestAnimationFrame(animateStats);
+    rafId = requestAnimationFrame(animateStats);
+    return () => cancelAnimationFrame(rafId);
   }, []);
 
   const testimonials = [
