@@ -55,7 +55,7 @@ const syncPreferredLanguage = (language, setPreferredLang) => {
 function App() {
   const [preferredLang, setPreferredLang] = useState(getInitialPreferredLanguage);
   const [isOpen, setIsOpen] = useState(false);
-  const [sunlight, setSunlight] = useState(false);
+  const [themeAnimNonce, setThemeAnimNonce] = useState(0);
 
   const getInitialTheme = () => {
     try {
@@ -74,6 +74,11 @@ function App() {
 
   const [name, setName] = useState(localStorage.getItem("farmerName") || "");
   const [inputName, setInputName] = useState("");
+
+  const handleThemeToggle = () => {
+    setTheme((t) => (t === "dark" ? "light" : "dark"));
+    setThemeAnimNonce((n) => n + 1);
+  };
 
 
   const handleLogin = (e) => {
@@ -130,7 +135,7 @@ function App() {
 
   return (
     <Router>
-      <div className={sunlight ? "app sunlight" : "app"}>
+      <div className="app">
 
         {/* Navbar */}
         {/* NAVBAR */}
@@ -163,22 +168,15 @@ function App() {
           <div className="nav-right">
             <button
               type="button"
-              onClick={() => setTheme((t) => (t === "dark" ? "light" : "dark"))}
+              onClick={handleThemeToggle}
               className="theme-toggle"
               aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
               aria-pressed={theme === "dark"}
               title={theme === "dark" ? "Light mode" : "Dark mode"}
             >
-              {theme === "dark" ? "☀️" : "🌙"}
-            </button>
-
-            <button
-              onClick={() => setSunlight(!sunlight)}
-              className="sunlight-toggle"
-              aria-label="Toggle high contrast mode"
-              aria-pressed={sunlight}
-            >
-              {sunlight ? "Normal Contrast" : "High Contrast"}
+              <span key={themeAnimNonce} className="theme-toggle-icon">
+                {theme === "dark" ? "☀️" : "🌙"}
+              </span>
             </button>
 
             {/* Language Dropdown */}
