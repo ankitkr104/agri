@@ -52,11 +52,11 @@ body,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  animation: themeToggleSmooth 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  animation: theme-toggle-smooth 0.9s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: transform, filter;
 }
 
-@keyframes themeToggleSmooth {
+@keyframes theme-toggle-smooth {
   from {
     transform: rotate(0deg) scale(1);
     filter: brightness(1);
