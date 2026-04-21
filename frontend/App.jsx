@@ -96,16 +96,24 @@ function App() {
   useNotifications();
 
   /* ---------------- THEME SYSTEM ---------------- */
-  useEffect(() => {
-    // On mount, set theme from localStorage
-    const theme = localStorage.getItem("theme") || "light";
-    document.documentElement.classList.toggle("theme-dark", theme === "dark");
-  }, []);
+  const [isDarkTheme, setIsDarkTheme] = useState(() => {
+    try {
+      return (localStorage.getItem("theme") || "light") === "dark";
+    } catch {
+      return false;
+    }
+  });
 
-  const handleThemeToggle = () => {
-    const isDark = document.documentElement.classList.toggle("theme-dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-  };
+  useEffect(() => {
+    document.documentElement.classList.toggle("theme-dark", isDarkTheme);
+    try {
+      localStorage.setItem("theme", isDarkTheme ? "dark" : "light");
+    } catch {
+      // ignore
+    }
+  }, [isDarkTheme]);
+
+  const handleThemeToggle = () => setIsDarkTheme((prev) => !prev);
 
   /* ---------------- LANGUAGE AUTO-TRANS ---------------- */
   useEffect(() => {
@@ -330,7 +338,7 @@ return () => {
 
         <div className="nav-right">
           <button onClick={handleThemeToggle} className="theme-toggle" aria-label="Toggle Theme">
-            {document.documentElement.classList.contains("theme-dark") ? "☀️" : "🌙"}
+            {isDarkTheme ? "☀️" : "🌙"}
           </button>
 
           <LanguageDropdown
