@@ -99,6 +99,63 @@ export default function Home() {
   const [statValues, setStatValues] = useState(stats.map(() => 1));
   const [user, setUser] = useState(null);
 
+  // Realistic Cloud SVG component for animation (soft edges, gradients, blue in light mode)
+  const Cloud = ({ className = "" }) => {
+    // Use CSS variables for fill and stroke so theme changes don't re-render component
+    return (
+      <svg
+        className={className}
+        width="260"
+        height="140"
+        viewBox="0 0 260 140"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <radialGradient id="cloudBlue" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#e0f2ff" stopOpacity="0.98" />
+            <stop offset="100%" stopColor="#90cdf4" stopOpacity="0.82" />
+          </radialGradient>
+          <radialGradient id="cloudWhite" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="#fff" stopOpacity="0.95" />
+            <stop offset="100%" stopColor="#e0e7ef" stopOpacity="0.7" />
+          </radialGradient>
+          <filter id="cloudBlur" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="10" />
+          </filter>
+        </defs>
+        <ellipse cx="100" cy="90" rx="80" ry="48" filter="url(#cloudBlur)" stroke="var(--cloud-outline)" strokeWidth="2.5" fill="var(--cloud-fill)" />
+        <ellipse cx="180" cy="70" rx="54" ry="34" filter="url(#cloudBlur)" stroke="var(--cloud-outline)" strokeWidth="2.2" fill="var(--cloud-fill)" />
+        <ellipse cx="150" cy="52" rx="38" ry="22" filter="url(#cloudBlur)" stroke="var(--cloud-outline)" strokeWidth="2" fill="var(--cloud-fill)" />
+      </svg>
+    );
+  };
+
+
+  // Birds animation (SVG, 3D-like movement) - increased number
+  const Birds = () => (
+    <div className="birds-anim-wrap">
+      {[...Array(7)].map((_, idx) => {
+        const width = 24 + Math.floor(Math.random() * 32);
+        const height = Math.floor(width / 2);
+        const pathD = `M2 ${height-2} Q${Math.floor(width/2)} 2 ${width-2} ${height-2}`;
+        return (
+          <svg
+            key={idx}
+            className={`bird bird-${idx+1}`}
+            width={width}
+            height={height}
+            viewBox={`0 0 ${width} ${height}`}
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d={pathD} stroke="#222" strokeWidth={1.2 + (idx % 3) * 0.6} fill="none"/>
+          </svg>
+        );
+      })}
+    </div>
+  );
+
   // Auth state listener
   useEffect(() => {
     if (!isFirebaseConfigured()) {
@@ -144,7 +201,15 @@ export default function Home() {
       <div className="home-weather-relative-wrap">
         <WeatherQuickWidget />
       </div>
-      <section className="hero-section">
+      <section className="hero-section highlight-light">
+        {/* Cloud Animation Layer */}
+        <div className="clouds-anim-wrap">
+          <Cloud className="cloud cloud-1" />
+          <Cloud className="cloud cloud-2" />
+          <Cloud className="cloud cloud-3" />
+        </div>
+        {/* Birds Animation Layer (more birds, both modes) */}
+        <Birds />
         <div className="hero-bg">
           <div className="hero-pattern"></div>
         </div>

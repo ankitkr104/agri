@@ -85,9 +85,7 @@ const syncLanguage = (lang, setLang) => {
 
 function App() {
   const [preferredLang, setPreferredLang] = useState(getInitialLanguage);
-
   const [isOpen, setIsOpen] = useState(false);
-  const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "light");
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
   const [profileCompleted, setProfileCompleted] = useState(true);
@@ -99,9 +97,15 @@ function App() {
 
   /* ---------------- THEME SYSTEM ---------------- */
   useEffect(() => {
+    // On mount, set theme from localStorage
+    const theme = localStorage.getItem("theme") || "light";
     document.documentElement.classList.toggle("theme-dark", theme === "dark");
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  }, []);
+
+  const handleThemeToggle = () => {
+    const isDark = document.documentElement.classList.toggle("theme-dark");
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  };
 
   /* ---------------- LANGUAGE AUTO-TRANS ---------------- */
   useEffect(() => {
@@ -280,9 +284,6 @@ return () => {
     return () => unsubscribeAuth();
   }, []);
 
-  const handleThemeToggle = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
-  };
 
   /* ---------------- OFFLINE STATUS ---------------- */
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
@@ -304,7 +305,7 @@ return () => {
   }, []);
 
   return (
-    <div className={`app ${theme === "dark" ? "theme-dark" : ""}`}>
+    <div className="app">
       {/* OFFLINE INDICATOR */}
       {isOffline && (
         <div className="offline-banner">
@@ -329,7 +330,7 @@ return () => {
 
         <div className="nav-right">
           <button onClick={handleThemeToggle} className="theme-toggle" aria-label="Toggle Theme">
-            {theme === "dark" ? "☀️" : "🌙"}
+            {document.documentElement.classList.contains("theme-dark") ? "☀️" : "🌙"}
           </button>
 
           <LanguageDropdown
