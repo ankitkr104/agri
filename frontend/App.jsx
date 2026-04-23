@@ -34,6 +34,8 @@ import Loader from "./Loader";
 import FarmingMap from "./FarmingMap";
 import CropProfitCalculator from "./CropProfitCalculator";
 
+import { syncOfflineRequests } from "./lib/syncOfflineRequests";
+import { auth, db, isFirebaseConfigured } from "./lib/firebase";
 import { auth, db, isFirebaseConfigured, doc, onSnapshot } from "./lib/firebase";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 
@@ -187,7 +189,13 @@ function App() {
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
 
    useEffect(() => {
-     const handleNetworkChange = () => setIsOffline(!navigator.onLine);
+     const handleNetworkChange = () => {
+       const offline = !navigator.onLine;
+       setIsOffline(offline);
+       if (!offline) {
+         syncOfflineRequests();
+       }
+     };
      window.addEventListener("online", handleNetworkChange);
      window.addEventListener("offline", handleNetworkChange);
 
