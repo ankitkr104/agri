@@ -404,8 +404,10 @@ body,
 /* --- Floating Chat Button --- */
 .floating-chat-btn {
   position: fixed;
-  bottom: 30px;
-  right: 30px;
+  bottom: calc(96px + constant(safe-area-inset-bottom));
+  bottom: calc(96px + env(safe-area-inset-bottom));
+  right: calc(20px + constant(safe-area-inset-right));
+  right: calc(20px + env(safe-area-inset-right));
   background: var(--brand-primary, #2e7d32);
   color: white;
   width: 65px;
@@ -427,8 +429,10 @@ body,
 
 @media (max-width: 768px) {
   .floating-chat-btn {
-    bottom: 20px;
-    right: 20px;
+    bottom: calc(72px + constant(safe-area-inset-bottom));
+    bottom: calc(72px + env(safe-area-inset-bottom));
+    right: calc(15px + constant(safe-area-inset-right));
+    right: calc(15px + env(safe-area-inset-right));
     width: 55px;
     height: 55px;
   }
@@ -458,6 +462,12 @@ body,
 
   .navbar {
     padding: 15px 20px;
+    padding-top: calc(15px + constant(safe-area-inset-top));
+    padding-top: calc(15px + env(safe-area-inset-top));
+    padding-left: calc(20px + constant(safe-area-inset-left));
+    padding-left: calc(20px + env(safe-area-inset-left));
+    padding-right: calc(20px + constant(safe-area-inset-right));
+    padding-right: calc(20px + env(safe-area-inset-right));
     flex-wrap: wrap;
   }
 
