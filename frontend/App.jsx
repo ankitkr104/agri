@@ -250,6 +250,7 @@ function App() {
                  </div>
                  <div className="dropdown-links">
                    <Link to="/dashboard" onClick={() => setShowMoreMenu(false)}><FaTachometerAlt /> Dashboard</Link>
+                   <Link to="/community" onClick={() => setShowMoreMenu(false)}><FaComments /> Community</Link>
                  </div>
                </div>
              )}
