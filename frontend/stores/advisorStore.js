@@ -33,10 +33,16 @@ export const useAdvisorStore = create((set) => ({
    showCropDiseaseDetection: false,
    setShowCropDiseaseDetection: (show) => set({ showCropDiseaseDetection: show }),
 
-   showSoilAnalysis: false,
-   setShowSoilAnalysis: (show) => set({ showSoilAnalysis: show }),
+  showPestManagement: false,
+  setShowPestManagement: (show) => set({ showPestManagement: show }),
 
-   // Reset store
+  showSoilAnalysis: false,
+  setShowSoilAnalysis: (show) => set({ showSoilAnalysis: show }),
+
+  showFertilizerPopup: false,
+  setShowFertilizerPopup: (show) => set({ showFertilizerPopup: show }),
+
+  // Reset store
    resetAdvisorStore: () =>
      set({
        farmers: 0,
@@ -44,11 +50,13 @@ export const useAdvisorStore = create((set) => ({
        languages: 0,
        showWeather: false,
        showSoilChatbot: false,
-       showSoilAnalysis: false,
-       showIrrigation: false,
-       showProfitCalculator: false,
-       showFarmingMap: false,
-       showCropDiseaseDetection: false,
-       showComingSoon: false,
+        showSoilAnalysis: false,
+        showIrrigation: false,
+        showProfitCalculator: false,
+        showFertilizerPopup: false,
+        showFarmingMap: false,
+        showCropDiseaseDetection: false,
+        showPestManagement: false,
+        showComingSoon: false,
      }),
 }));

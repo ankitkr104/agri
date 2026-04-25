@@ -122,23 +122,24 @@ const ProfileSetup = ({ user, profileCompleted }) => {
     }
 
     setLoading(true);
-    try {
-      const currentUser = auth.currentUser;
-      if (currentUser) {
-        await setDoc(doc(db, "users", currentUser.uid), {
-          displayName: name,
-          language: language,
-          cropType: cropType,
-          location: location,
-          address: address,
-          profileCompleted: true,
-          updatedAt: new Date().toISOString()
-        }, { merge: true });
-        
-        navigate("/");
-      } else {
-        navigate("/login");
-      }
+      try {
+        const currentUser = auth?.currentUser;
+        if (isFirebaseConfigured() && currentUser) {
+          await setDoc(doc(db, "users", currentUser.uid), {
+            displayName: name,
+            language: language,
+            cropType: cropType,
+            location: location,
+            address: address,
+            profileCompleted: true,
+            updatedAt: new Date().toISOString()
+          }, { merge: true });
+          
+          navigate("/");
+        } else {
+          setError("Unable to save profile. Please try again.");
+          setLoading(false);
+        }
     } catch (err) {
       console.error("Save profile error:", err);
       setError("Failed to save profile. Please try again.");

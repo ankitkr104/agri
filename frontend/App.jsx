@@ -312,9 +312,9 @@ function App() {
             <h2>Verify Your Email</h2>
             <p>We've sent a link to <b>{user.email}</b>.<br /> Please verify your email to unlock all features.</p>
             <button
-              onClick={() => {
-                auth.currentUser.reload().then(() => window.location.reload());
-              }}
+               onClick={() => {
+                 auth?.currentUser?.reload().then(() => window.location.reload()).catch(() => window.location.reload());
+               }}
               className="btn-refresh"
             >
               I've Verified My Email
