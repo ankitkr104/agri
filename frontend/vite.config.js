@@ -235,15 +235,16 @@ export default defineConfig(() => ({
       }
     }
   },
-  build: {
-    outDir: 'dist',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'],
-          firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore']
-        }
-      }
-    }
-  }
+   build: {
+     outDir: 'dist',
+     rollupOptions: {
+       external: ['@floating-ui/react'],
+       output: {
+         manualChunks: {
+           vendor: ['react', 'react-dom', 'react-router-dom'],
+           firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore']
+         }
+       }
+     }
+   }
 }))
