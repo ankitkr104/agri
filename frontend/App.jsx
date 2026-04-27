@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Routes, Route, Link, Navigate, useLocation } from "react-router-dom";
 
 import { ToastContainer } from "react-toastify";
@@ -106,6 +106,26 @@ function App() {
   const [showMoreMenu, setShowMoreMenu] = useState(false);
   const location = useLocation();
 
+  const moreMenuRef = useRef(null);
+  const scorecardRef = useRef(null);
+  const navRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (moreMenuRef.current && !moreMenuRef.current.contains(e.target)) {
+        setShowMoreMenu(false);
+      }
+      if (scorecardRef.current && !scorecardRef.current.contains(e.target)) {
+        setShowScorecard(false);
+      }
+      if (navRef.current && !navRef.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
   const handleLangChange = (e) => {
     syncLanguage(e.target.value, setPreferredLang);
   };
@@ -211,7 +231,7 @@ function App() {
         </div>
       )}
 
-      <nav className="navbar">
+      <nav className="navbar" ref={navRef}>
         <div className="nav-left">
           <Link to="/" className="brand">Fasal Saathi</Link>
         </div>
@@ -229,7 +249,7 @@ function App() {
             {isDarkTheme ? "☀️" : "🌙"}
           </button>
 
-           <div className="more-menu-container" onClick={() => { setShowMoreMenu(!showMoreMenu); setShowScorecard(false); }}>
+           <div className="more-menu-container" ref={moreMenuRef} onClick={() => { setShowMoreMenu(!showMoreMenu); setShowScorecard(false); }}>
              <button className="btn-more-menu" aria-label="Profile and Settings">
                <FaUser style={{ width: "24px", height: "24px", fontSize: "24px", minWidth: "24px", minHeight: "24px" }} />
              </button>
@@ -257,7 +277,7 @@ function App() {
              )}
            </div>
 
-          <div className="nav-user" onClick={() => { setShowScorecard(!showScorecard); setShowMoreMenu(false); }}>
+          <div className="nav-user" ref={scorecardRef} onClick={() => { setShowScorecard(!showScorecard); setShowMoreMenu(false); }}>
             {loading ? (
               <div className="nav-loader-mini"></div>
             ) : user ? (
