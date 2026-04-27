@@ -96,6 +96,7 @@ const syncLanguage = (lang, setLang) => {
 };
 
 function App() {
+  const scorecardRef = useRef(null);
   const [preferredLang, setPreferredLang] = useState(getInitialLanguage);
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
