@@ -48,7 +48,12 @@ export default function ContactUs() {
     if (Object.keys(errs).length) { setErrors(errs); return; }
     setLoading(true);
     try {
-      await new Promise((res) => setTimeout(res, 1400));
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) throw new Error("Server error");
       setSubmitted(true);
       toast.success("Message sent! We'll get back to you within 24 hours. 🌱");
     } catch {
@@ -74,9 +79,12 @@ export default function ContactUs() {
         <div className="contact-hero-badge"><FaLeaf /> Get In Touch</div>
         <h1>We're Here to<br /><span className="hero-highlight">Help You Grow</span></h1>
         <p>Have a question, suggestion, or need support? The Fasal Saathi team is just a message away.</p>
+        {/* TODO: Replace placeholder contact links below with real values before shipping.
+            Update CONTACT_EMAIL, CONTACT_PHONE, and SOCIAL_LINKS with actual
+            project details once available. */}
         <div className="hero-quick-links">
-          <a href="mailto:hello@fasalsaathi.demo" className="hero-quick-btn"><FaEnvelope /> Email Us</a>
-          <a href="https://wa.me/910000000000" className="hero-quick-btn whatsapp"><FaWhatsapp /> WhatsApp</a>
+          <a href="mailto:contact@fasalsaathi.com" className="hero-quick-btn"><FaEnvelope /> Email Us</a>
+          <a href="https://wa.me/919999999999" className="hero-quick-btn whatsapp" target="_blank" rel="noopener noreferrer"><FaWhatsapp /> WhatsApp</a>
         </div>
       </div>
 
@@ -193,8 +201,10 @@ export default function ContactUs() {
                   </div>
 
                   {/* Progress bar */}
-                  <div className="cf-progress">
-                    <div className="cf-progress-bar" style={{ width: `${Math.min(100, ([form.name, form.email, form.topic, form.message].filter(Boolean).length / 4) * 100)}%` }} />
+                  <div className="cf-progress-wrapper">
+                    <div className="cf-progress">
+                      <div className="cf-progress-bar" style={{ width: `${Math.min(100, ([form.name, form.email, form.topic, form.message].filter(Boolean).length / 4) * 100)}%` }} />
+                    </div>
                     <span>{[form.name, form.email, form.topic, form.message].filter(Boolean).length} of 4 required fields filled</span>
                   </div>
 
@@ -223,13 +233,13 @@ export default function ContactUs() {
               <p>Stay updated with farming tips and platform news.</p>
               <div className="social-links">
                 {[
-                  { icon: <FaFacebook />, label: "Facebook", href: "#", color: "#1877f2" },
-                  { icon: <FaTwitter />, label: "Twitter", href: "#", color: "#1da1f2" },
-                  { icon: <FaInstagram />, label: "Instagram", href: "#", color: "#e1306c" },
-                  { icon: <FaYoutube />, label: "YouTube", href: "#", color: "#ff0000" },
-                  { icon: <FaWhatsapp />, label: "WhatsApp", href: "#", color: "#25d366" },
+                  { icon: <FaFacebook />, label: "Facebook", href: "https://facebook.com/fasalsaathi", color: "#1877f2" },
+                  { icon: <FaTwitter />, label: "Twitter", href: "https://twitter.com/fasalsaathi", color: "#1da1f2" },
+                  { icon: <FaInstagram />, label: "Instagram", href: "https://instagram.com/fasalsaathi", color: "#e1306c" },
+                  { icon: <FaYoutube />, label: "YouTube", href: "https://youtube.com/@fasalsaathi", color: "#ff0000" },
+                  { icon: <FaWhatsapp />, label: "WhatsApp", href: "https://wa.me/919999999999", color: "#25d366" },
                 ].map((s) => (
-                  <a key={s.label} href={s.href} className="social-link" style={{ "--social-color": s.color }} aria-label={s.label}>
+                  <a key={s.label} href={s.href} className="social-link" style={{ "--social-color": s.color }} aria-label={s.label} target="_blank" rel="noopener noreferrer">
                     <span className="social-icon" style={{ color: s.color }}>{s.icon}</span>
                     <span>{s.label}</span>
                   </a>

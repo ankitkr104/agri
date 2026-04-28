@@ -20,15 +20,15 @@
   width: 500px; height: 500px;
   background: radial-gradient(circle, rgba(16,185,129,0.18), transparent 70%);
   top: -100px; right: -100px;
-  animation: blobFloat 8s ease-in-out infinite;
+  animation: blob-float 8s ease-in-out infinite;
 }
 .contact-blob-2 {
   width: 400px; height: 400px;
   background: radial-gradient(circle, rgba(99,102,241,0.15), transparent 70%);
   bottom: 100px; left: -80px;
-  animation: blobFloat 10s ease-in-out infinite reverse;
+  animation: blob-float 10s ease-in-out infinite reverse;
 }
-@keyframes blobFloat {
+@keyframes blob-float {
   0%, 100% { transform: translateY(0) scale(1); }
   50%       { transform: translateY(-30px) scale(1.05); }
 }
@@ -57,7 +57,7 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.05em;
-  animation: fadeDown 0.5s ease-out;
+  animation: fade-down 0.5s ease-out;
 }
 
 .contact-hero h1 {
@@ -66,7 +66,7 @@
   color: var(--text-primary, #0f172a);
   margin: 0;
   line-height: 1.1;
-  animation: fadeDown 0.6s ease-out;
+  animation: fade-down 0.6s ease-out;
 }
 
 .hero-highlight {
@@ -86,7 +86,7 @@
   max-width: 500px;
   line-height: 1.7;
   margin: 0;
-  animation: fadeDown 0.7s ease-out;
+  animation: fade-down 0.7s ease-out;
 }
 
 .hero-quick-links {
@@ -94,7 +94,7 @@
   gap: 12px;
   flex-wrap: wrap;
   justify-content: center;
-  animation: fadeDown 0.8s ease-out;
+  animation: fade-down 0.8s ease-out;
 }
 
 .hero-quick-btn {
@@ -120,7 +120,7 @@
 .hero-quick-btn.whatsapp { border-color: #25d366; color: #25d366; }
 .hero-quick-btn.whatsapp:hover { background: #25d366; color: white; box-shadow: 0 6px 20px rgba(37,211,102,0.3); }
 
-@keyframes fadeDown {
+@keyframes fade-down {
   from { opacity: 0; transform: translateY(-16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
@@ -262,10 +262,10 @@
   border-radius: 24px;
   padding: 36px;
   box-shadow: 0 4px 30px rgba(0,0,0,0.06);
-  animation: slideUp 0.5s ease-out;
+  animation: slide-up 0.5s ease-out;
 }
 
-@keyframes slideUp {
+@keyframes slide-up {
   from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
@@ -423,38 +423,27 @@
 .cf-char-count.warn { color: #f59e0b; }
 
 /* Progress bar */
-.cf-progress {
+.cf-progress-wrapper {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.cf-progress span {
+.cf-progress-wrapper span {
   font-size: 11px;
   color: #94a3b8;
   font-weight: 500;
 }
-.cf-progress-bar-track {
-  height: 4px;
-  background: #f1f5f9;
-  border-radius: 4px;
-  overflow: hidden;
-}
 .cf-progress {
-  background: #f1f5f9;
   height: 4px;
+  background: #f1f5f9;
   border-radius: 4px;
   overflow: hidden;
-  position: relative;
 }
 .cf-progress-bar {
   height: 100%;
   background: linear-gradient(90deg, #10b981, #059669);
   border-radius: 4px;
   transition: width 0.4s ease;
-}
-.cf-progress + span {
-  font-size: 11px;
-  color: #94a3b8;
 }
 
 /* Submit button */
@@ -486,10 +475,10 @@
   border: 2px solid rgba(255,255,255,0.4);
   border-top-color: white;
   border-radius: 50%;
-  animation: spin 0.7s linear infinite;
+  animation: spin-anim 0.7s linear infinite;
   flex-shrink: 0;
 }
-@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin-anim { to { transform: rotate(360deg); } }
 
 /* Success state */
 .cf-success {
@@ -499,7 +488,7 @@
   text-align: center;
   gap: 16px;
   padding: 20px 0;
-  animation: slideUp 0.4s ease-out;
+  animation: slide-up 0.4s ease-out;
 }
 .cf-success-ring {
   width: 90px; height: 90px;
@@ -508,9 +497,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
-@keyframes popIn {
+@keyframes pop-in {
   from { transform: scale(0); opacity: 0; }
   to   { transform: scale(1); opacity: 1; }
 }
@@ -634,10 +623,10 @@
   height: 100%;
   background: linear-gradient(90deg, #10b981, #059669);
   border-radius: 6px;
-  animation: fillBar 1.2s ease-out forwards;
+  animation: fill-bar 1.2s ease-out forwards;
 }
-@keyframes fillBar {
-  from { width: 0 !important; }
+@keyframes fill-bar {
+  from { width: 0; }
 }
 
 /* ── FAQ ── */
