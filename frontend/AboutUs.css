@@ -582,3 +582,261 @@
   .about-btn-primary, .about-btn-outline { width: 100%; justify-content: center; }
   .about-features-section { padding: 32px 14px; border-radius: 22px; }
 }
+
+/* ── EDITORIAL HERO ── */
+.about-hero-editorial {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  min-height: 90vh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px 60px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.about-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-right: 48px;
+}
+
+.about-hero-title {
+  font-size: clamp(42px, 6vw, 68px);
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.1;
+  animation: about-fade-down 0.65s ease-out both;
+}
+
+.about-hero-highlight {
+  background: linear-gradient(135deg, #4ade80, #86efac, #22c55e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+  font-size: clamp(52px, 8vw, 82px);
+  line-height: 1.1;
+}
+
+.about-hero-body {
+  font-size: 16px;
+  color: #475569;
+  line-height: 1.8;
+  margin: 0;
+  animation: about-fade-down 0.8s ease-out both;
+}
+
+.about-hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: about-fade-down 0.7s ease-out both;
+}
+
+/* Farm Scene */
+.about-hero-image-wrap {
+  width: 100%;
+  max-width: 480px;
+}
+
+.farm-scene {
+  background: linear-gradient(180deg, #e0f2fe 0%, #bbf7d0 50%, #86efac 100%);
+  border-radius: 32px;
+  padding: 28px;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(16,185,129,0.2);
+  overflow: hidden;
+  border: 2px solid rgba(16,185,129,0.2);
+}
+
+.farm-sky {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.farm-sun { font-size: 36px; animation: about-pulse 3s ease-in-out infinite; }
+.farm-cloud { font-size: 28px; animation: about-blob-float 6s ease-in-out infinite; }
+.farm-cloud-2 { animation-delay: 1.5s; }
+
+.farm-field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.farm-row {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+.farm-crop {
+  font-size: 32px;
+  animation: about-blob-float 4s ease-in-out infinite;
+  display: inline-block;
+}
+.farm-crop:nth-child(2) { animation-delay: 0.3s; }
+.farm-crop:nth-child(3) { animation-delay: 0.6s; }
+.farm-crop:nth-child(4) { animation-delay: 0.9s; }
+.farm-crop:nth-child(5) { animation-delay: 1.2s; }
+
+.farm-row-2 .farm-crop { font-size: 28px; animation-delay: 0.5s; }
+
+.farm-tractor-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 8px 0;
+}
+.farm-tractor {
+  font-size: 44px;
+  animation: farm-drive 4s linear infinite;
+  display: inline-block;
+}
+@keyframes farm-drive {
+  0%   { transform: translateX(0); }
+  45%  { transform: translateX(60px); }
+  50%  { transform: translateX(60px) scaleX(-1); }
+  95%  { transform: translateX(0) scaleX(-1); }
+  100% { transform: translateX(0); }
+}
+.farm-farmer { font-size: 36px; animation: about-blob-float 3s ease-in-out infinite; }
+
+.farm-animals {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+.farm-cow  { font-size: 36px; animation: about-blob-float 5s ease-in-out infinite; }
+.farm-goat { font-size: 30px; animation: about-blob-float 5s ease-in-out infinite 1s; }
+
+/* Floating stat cards on farm scene */
+.farm-stat-card {
+  position: absolute;
+  background: white;
+  border-radius: 14px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  animation: about-fade-down 1s ease-out both;
+}
+.farm-stat-1 { top: 16px; right: -16px; animation-delay: 0.8s; }
+.farm-stat-2 { bottom: 60px; right: -16px; animation-delay: 1s; }
+.farm-stat-3 { bottom: 16px; left: -16px; animation-delay: 1.2s; }
+
+.farm-stat-icon { font-size: 22px; }
+.farm-stat-val  { font-size: 18px; font-weight: 900; color: #0f172a; line-height: 1; }
+.farm-stat-lbl  { font-size: 11px; color: #64748b; font-weight: 600; }
+
+/* ── FARM STRIP ── */
+.about-farm-strip {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  background: #f1fdf7;
+  border-top: 1px solid rgba(16,185,129,0.15);
+  border-bottom: 1px solid rgba(16,185,129,0.15);
+  padding: 24px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.farm-strip-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 0 32px;
+  border-right: 1px solid rgba(16,185,129,0.15);
+  transition: transform 0.2s;
+}
+.farm-strip-item:last-child { border-right: none; }
+.farm-strip-item:hover { transform: translateY(-4px); }
+
+.farm-strip-icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  transition: transform 0.2s;
+}
+.farm-strip-item:hover .farm-strip-icon { transform: scale(1.15) rotate(-5deg); }
+
+.farm-strip-item span:last-child {
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+  text-align: center;
+}
+
+/* Visual bar with label */
+.visual-bar-labeled {
+  display: grid;
+  grid-template-columns: 90px 1fr 36px;
+  align-items: center;
+  gap: 8px;
+}
+.visual-bar-label { font-size: 11px; font-weight: 600; color: #475569; }
+.visual-bar-pct   { font-size: 11px; font-weight: 700; color: #10b981; text-align: right; }
+
+/* Timeline dot with emoji */
+.timeline-dot {
+  font-size: 16px;
+  width: 36px; height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 3px solid #10b981;
+  box-shadow: 0 0 0 4px rgba(16,185,129,0.15);
+}
+
+/* CTA farm row */
+.about-cta-farm-row {
+  display: flex;
+  gap: 12px;
+  font-size: 28px;
+  margin-bottom: 4px;
+  animation: about-blob-float 3s ease-in-out infinite;
+}
+
+/* Dark theme additions */
+.theme-dark .about-hero-title { color: #f1f5f9; }
+.theme-dark .about-hero-body  { color: #94a3b8; }
+.theme-dark .farm-scene { background: linear-gradient(180deg, #1e3a5f 0%, #14532d 60%, #166534 100%); border-color: rgba(16,185,129,0.3); }
+.theme-dark .farm-stat-card { background: #1e293b; }
+.theme-dark .farm-stat-val  { color: #f1f5f9; }
+.theme-dark .about-farm-strip { background: #0f172a; border-color: rgba(16,185,129,0.1); }
+.theme-dark .farm-strip-item span:last-child { color: #94a3b8; }
+.theme-dark .timeline-dot { background: #1e293b; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-hero-editorial { grid-template-columns: 1fr; min-height: auto; padding: 60px 20px 40px; }
+  .about-hero-left { padding-right: 0; }
+  .about-farm-strip { gap: 0; }
+  .farm-strip-item { padding: 0 16px; }
+  .farm-stat-1, .farm-stat-2, .farm-stat-3 { display: none; }
+}
+@media (max-width: 600px) {
+  .about-farm-strip { justify-content: flex-start; overflow-x: auto; flex-wrap: nowrap; }
+  .farm-strip-item { flex-shrink: 0; }
+  .visual-bar-labeled { grid-template-columns: 70px 1fr 30px; }
+}
+
+.about-tractor-img {
+  width: 100%;
+  max-width: 520px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.18));
+}

@@ -25,11 +25,11 @@ const FEATURES = [
 ];
 
 const TIMELINE = [
-  { year: "2022", title: "Idea Born", desc: "Fasal Saathi started as a college project to solve real problems faced by Indian farmers." },
-  { year: "2023", title: "First Prototype", desc: "Launched MVP with crop recommendations and basic weather alerts for 3 states." },
-  { year: "2024", title: "Multi-language Launch", desc: "Expanded to 12 Indian languages and onboarded 10,000+ farmers." },
-  { year: "2025", title: "AI Integration", desc: "Integrated machine learning models for yield prediction and soil analysis." },
-  { year: "2026", title: "Growing Strong", desc: "50,000+ farmers, community features, and expanding to more regions." },
+  { year: "2022", title: "Idea Born", desc: "Fasal Saathi started as a college project to solve real problems faced by Indian farmers.", emoji: "💡" },
+  { year: "2023", title: "First Prototype", desc: "Launched MVP with crop recommendations and basic weather alerts for 3 states.", emoji: "🚀" },
+  { year: "2024", title: "Multi-language Launch", desc: "Expanded to 12 Indian languages and onboarded 10,000+ farmers.", emoji: "🌍" },
+  { year: "2025", title: "AI Integration", desc: "Integrated machine learning models for yield prediction and soil analysis.", emoji: "🤖" },
+  { year: "2026", title: "Growing Strong", desc: "50,000+ farmers, community features, and expanding to more regions.", emoji: "🌱" },
 ];
 
 const TEAM = [
@@ -38,6 +38,8 @@ const TEAM = [
   { name: "Priya Sharma", role: "AI/ML Engineer", github: "#", linkedin: "#", twitter: "#", initial: "P" },
   { name: "Rahul Verma", role: "Backend Developer", github: "#", linkedin: "#", twitter: "#", initial: "R" },
 ];
+
+const FARM_ICONS = [];
 
 export default function AboutUs() {
   const [openFaq, setOpenFaq] = useState(null);
@@ -48,20 +50,37 @@ export default function AboutUs() {
       <div className="about-blob about-blob-1" />
       <div className="about-blob about-blob-2" />
 
-      {/* HERO */}
-      <section className="about-hero">
-        <div className="about-hero-badge"><FaLeaf /> About Fasal Saathi</div>
-        <h1>Empowering Farmers<br /><span className="about-hero-highlight">With Smart Technology</span></h1>
-        <p>Fasal Saathi is an AI-powered agricultural platform built to give every Indian farmer access to the tools, insights, and knowledge they need to grow better and earn more.</p>
-        <div className="about-hero-actions">
-          <Link to="/advisor" className="about-btn-primary"><FaRocket /> Try the Advisor</Link>
-          <Link to="/contact" className="about-btn-outline"><FaArrowRight /> Contact Us</Link>
+      {/* ── HERO — editorial style like reference ── */}
+      <section className="about-hero-editorial">
+        <div className="about-hero-left">
+          <h1 className="about-hero-title">
+            Hey, we are<br /><span className="about-hero-highlight">Fasal Saathi</span>
+          </h1>
+          <p className="about-hero-body">
+            We're an <strong>AI-powered agricultural platform</strong> built to empower Indian farmers with smart technology, real-time insights, and practical knowledge. Our goal is to make farming more efficient and profitable by helping farmers choose the right crops, monitor soil health, access weather updates, and track live market prices — all in one simple, multilingual platform that works even in low-connectivity areas.
+          </p>
+          <p className="about-hero-body">
+            We are driven by a mission to make <strong>agricultural intelligence accessible to every farmer</strong>, regardless of land size or literacy level. By combining traditional farming wisdom with modern AI, we aim to reduce losses, improve yields, and increase income while ensuring <strong>trust, privacy, and inclusivity</strong> at every step.
+          </p>
+          <div className="about-hero-actions">
+            <Link to="/advisor" className="about-btn-primary"><FaRocket /> Try the Advisor</Link>
+            <Link to="/contact" className="about-btn-outline"><FaArrowRight /> Contact Us</Link>
+          </div>
         </div>
-        <div className="about-hero-scroll">
-          <span>Scroll to explore</span>
-          <div className="scroll-mouse"><div className="scroll-wheel" /></div>
+
+        {/* Right — tractor image */}
+        <div className="about-hero-right">
+          <div className="about-hero-image-wrap">
+            <img
+              src="/tractor.png"
+              alt="Modern farming tractor"
+              className="about-tractor-img"
+            />
+          </div>
         </div>
       </section>
+
+      {/* ── FARM STRIP removed ── */}
 
       {/* MISSION & VISION */}
       <div className="about-section">
@@ -97,16 +116,26 @@ export default function AboutUs() {
               <span>AI Crop Advisor</span>
             </div>
             <div className="visual-bars">
-              {[80, 65, 90, 55, 75].map((w, i) => (
-                <div key={i} className="visual-bar-row">
-                  <div className="visual-bar" style={{ width: `${w}%`, animationDelay: `${i * 0.15}s` }} />
+              {[
+                { label: "🌾 Wheat", w: 80 },
+                { label: "🌽 Maize", w: 65 },
+                { label: "🍅 Tomato", w: 90 },
+                { label: "🌿 Spinach", w: 55 },
+                { label: "🥔 Potato", w: 75 },
+              ].map((item, i) => (
+                <div key={i} className="visual-bar-labeled">
+                  <span className="visual-bar-label">{item.label}</span>
+                  <div className="visual-bar-row">
+                    <div className="visual-bar" style={{ width: `${item.w}%`, animationDelay: `${i * 0.15}s` }} />
+                  </div>
+                  <span className="visual-bar-pct">{item.w}%</span>
                 </div>
               ))}
             </div>
             <div className="visual-footer">
-              <span className="visual-tag">🌾 Wheat</span>
-              <span className="visual-tag">🌽 Maize</span>
-              <span className="visual-tag">🍅 Tomato</span>
+              <span className="visual-tag">🚜 Tractor Ready</span>
+              <span className="visual-tag">💧 Irrigated</span>
+              <span className="visual-tag">�️ Good Weather</span>
             </div>
           </div>
         </div>
@@ -159,7 +188,7 @@ export default function AboutUs() {
           <div className="timeline-line" />
           {TIMELINE.map((t, i) => (
             <div className={`about-timeline-item ${i % 2 === 0 ? "left" : "right"}`} key={i}>
-              <div className="timeline-dot" />
+              <div className="timeline-dot">{t.emoji}</div>
               <div className="timeline-card">
                 <span className="timeline-year">{t.year}</span>
                 <h3>{t.title}</h3>
@@ -185,9 +214,9 @@ export default function AboutUs() {
               <p>{m.role}</p>
               {/* TODO: Replace href="#" with real social profile links */}
               <div className="team-socials">
-                <a href={m.github} aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                <a href={m.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-                <a href={m.twitter} aria-label="Twitter" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
+                {m.github && m.github !== "#" && <a href={m.github} aria-label="GitHub" target="_blank" rel="noopener noreferrer"><FaGithub /></a>}
+                {m.linkedin && m.linkedin !== "#" && <a href={m.linkedin} aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>}
+                {m.twitter && m.twitter !== "#" && <a href={m.twitter} aria-label="Twitter" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>}
               </div>
             </div>
           ))}
@@ -197,6 +226,9 @@ export default function AboutUs() {
       {/* CTA */}
       <section className="about-cta">
         <div className="about-cta-inner">
+          <div className="about-cta-farm-row">
+            <span>🌾</span><span>🚜</span><span>🐄</span><span>🌽</span><span>👩‍🌾</span>
+          </div>
           <FaLeaf className="about-cta-icon" />
           <h2>Ready to Farm Smarter?</h2>
           <p>Join farmers already using Fasal Saathi to grow better crops and earn more.</p>
